@@ -1,0 +1,47 @@
+<!-- This Section shows the details of an Actor. Similar Sections are available for director and Movie -->
+<div class="box" style="margin: 2%">
+    <div class="columns is-centered">
+        <!-- Poster  -->
+        <div class="column is-centered is-one-third">
+            <div class="image is-centered" style="text-align: center">
+                <img src="{{ results['IMG'] }}" alt="" height="480px" style="max-height: 480px;
+                width: auto;
+                border-radius: 15px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;">
+            </div>
+        </div>
+        <!-- Details -->
+        <div class="details column has-text-left">
+            <p class="title has-text-weight-normal is-capitalized is-size-1">{{ results['name'] }}</p>
+            <p style="padding: 5px" class="year"><strong>Gender : </strong>{{ results['GD'] }}</p>
+            <p style="padding: 5px" class="year"><strong>Citizenship : </strong>{{ results['CZ'] }}</p>
+            <p style="padding: 5px" class="year"><strong>Date of Birth : </strong>{{ results['DOB'] }}</p>
+            <p style="padding: 5px" class="cast"> <strong>Movies</strong> :
+                {% for m in results['movies'] %}
+                <a href="/?filter=Movie&searchInput={{m}}" id="link" style="
+                    text-decoration: none;
+                    transition: 0.5s
+                    "
+                >
+                    {{ m }}
+                </a>
+                {% if m != results['movies'][-1]%}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p style="padding: 5px" class="_cast"> <strong>Awards and Nominations</strong> :
+                {% for a in results['awards'] %}
+                {{ a }}
+                {% if a != results['awards'][-1] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+
+        </div>
+    </div>
+
+</div>

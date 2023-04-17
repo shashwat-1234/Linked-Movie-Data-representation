@@ -1,0 +1,23 @@
+<div class="box" style="padding: 0">
+    <div class="hero is-danger is-medium" style="margin: 0; border-radius: 6px">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title has-text-weight-medium is-capitalized is-size-1">Sorry !</h1>
+                <h2 class="title has-text-weight-light is-size-3">
+                    Could not found the {{ current_filter }} you were searching for :( <br />
+                    Maybe try using
+                    {% for filter in filters%}
+                    {% if filter != current_filter %}
+                    {{filter}}
+                    {% if filter != filters[-1] %}
+                    or
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    as search filter
+
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie Search</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='bulma.min.css') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static',filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static',filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static',filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static',filename='site.webmanifest') }}">
+</head>
+<style type="text/css">
+    html {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+</style>
+
+<body>
+    <!-- Global Navbar -->
+    <div class="container is-fluid" style="margin-top: 1%; text-align: center">
+        <!-- Input Form -->
+        <form class="columns is-mobile is-centered" action="" method="GET">
+            <div class="field column">
+                <div class="control">
+                    <div class="select is-primary is-rounded">
+                        <select name="filter">
+                            {%for filter in filters%}
+                            {%if filter == current_filter%}
+                            <option value={{filter}} selected>{{filter}}</option>
+                            {%else%}
+                            <option value={{filter}}>{{filter}}</option>
+                            {%endif%}
+                            {%endfor%}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field column is-four-fifths">
+                <div class="control">
+                    {% if current_filter == 'Actor'%}
+                    <input autocomplete="off" name="searchInput" class="input is-primary is-rounded" required type="text"
+                        placeholder="Search For an Actor">
+                    {% else %}
+                    <input autocomplete="off" name="searchInput" class="input is-primary is-rounded" required type="text"
+                        placeholder="Search For a {{ current_filter }}">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="field column">
+                <div class="control">
+                    <button type="submit" class="button is-primary is-rounded is-outlined">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Result Block -->
+        {% if results==None %}
+            <div>Write your query</div>
+        {% elif results == "FAIL" %}
+            {% include 'NotFound.html' %}
+        {% elif current_filter == 'Movie' %}
+            {% include 'MovieDetails.html' %}
+        {% elif current_filter == 'Director' %}
+            {% include 'DirectorDetails.html' %}
+        {% elif current_filter == 'Actor' %}
+            {% include 'ActorDetails.html' %}
+        {% endif %}
+
+    </div>
+</body>
+
+</html>

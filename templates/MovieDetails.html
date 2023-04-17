@@ -1,0 +1,86 @@
+<!-- This Section shows the details of a Movie. Similar Sections are available for actor and director -->
+<div class="box" style="margin: 2%">
+    <div class="columns is-centered">
+        <!-- Poster  -->
+        <div class="column is-centered is-one-third">
+            <div class="image is-centered" style="text-align: center">
+                <img src="{{ results['image'] }}" alt="" height="480px" style="max-height: 480px;
+                width: auto;
+                border-radius: 15px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;">
+            </div>
+        </div>
+        <!-- Details -->
+        <div class="details column has-text-left">
+            <p class="title has-text-weight-normal is-capitalized is-size-1">{{ results['name'] }}</p>
+            <p style="padding: 5px" class="year"><strong>Year : </strong>{{ results['year'] }}</p>
+            <p style="padding: 5px" class="year"><strong>Rating: </strong>{{ results['rating'] }}</p>
+            <p style="padding: 5px" class="runtime"><strong>Runtime: </strong> : {{ results['RTIME'] }} </p>
+            <p style="padding: 5px" class="director"><strong> Director</strong> :
+                {% for di in results['DIR'] %}
+                <a href="/?filter=Director&searchInput={{di}}" id="link" style="
+                    text-decoration: none;
+                    transition: 0.5s
+                    "
+                >
+                {{ di }}
+                </a>
+                {% if di != results['DIR'][-1] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p style="padding: 5px" class="genre"><strong>Genre</strong> : 
+                {% for g in results['GENRE'] %}
+                {{ g }}
+                {% if g != results['GENRE'][-1] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p style="padding: 5px" class="studio"><strong>Studio</strong> : 
+                {% for c in results['CL'] %}
+                {{ c }}
+                {% if c != results['CL'][-1] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p style="padding: 5px" class="cast"> <strong>Cast</strong> :
+                {% for ca in results['cast'] %}
+                <a href="/?filter=Actor&searchInput={{ca}}" id="link" style="
+                    text-decoration: none;
+                    transition: 0.5s
+                    "
+                >
+                {{ ca }}
+                </a>
+                {% if ca != results['cast'][-1] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p style="padding: 5px" class="music"><strong>Music</strong> : 
+                {% for ml in results['ML'] %}
+                {{ ml }}
+                {% if ml != results['ML'][-1] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+            <p style="padding: 5px" class="boxoffice"><strong>Box Office</strong> : {{ results['BOX'] }}</p>
+            <p style="padding: 5px" class="_cast"> <strong>Awards and Nominations</strong> :
+                {% for a in results['AWS'] %}
+                {{ a }}
+                {% if aw != results['AWS'][-1] and aw != results['AWS'][0] %}
+                ,
+                {% endif %}
+                {% endfor %}
+            </p>
+
+        </div>
+    </div>
+
+</div>
